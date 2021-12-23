@@ -9,7 +9,11 @@ class AttendeesController extends Controller
 {
     public function index()
     {
-        $attendees = Attendee::all();
+        $attendees = Attendee::
+        departmentFilter(request('dep_id'))
+        ->createdFilter(request('date'))
+        ->orderBy('created_at', 'asc')
+        ->get();
         return response()->json([
             "message" => "ok",
             "data" => $attendees
@@ -23,7 +27,7 @@ class AttendeesController extends Controller
         $attendee->dep_id = request()->get('dep_id');
         $attendee->number = request()->get('number');
         $attendee->save();
-        $attendees = Attendee::all();
+        $attendees = Attendee::orderBy('created_at', 'asc')->get();
         return response()->json([
             "message" => "Registration Success",
             "data" => $attendees

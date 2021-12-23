@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Attendee extends Model
+class Attendee extends UuidModel
 {
     use HasFactory, SoftDeletes;
 
@@ -16,8 +16,7 @@ class Attendee extends Model
     protected $fillable = [
         'name',
         'dep_id',
-        'number',
-        'start',
-        'end'
+        'number'
     ];
+
 }
